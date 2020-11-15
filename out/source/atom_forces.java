@@ -32,11 +32,12 @@ PGraphics pg;
 public void settings()
 {
     fullScreen(P2D);
-    // size(600, 600, P2D);
+    // size(1920, 1080, P2D);
 }
 
 public void setup()
 {
+    frame.setResizable(true);
     pg = createGraphics(width, height, P2D);
     pg.noSmooth();
 
@@ -59,8 +60,8 @@ public void draw()
 
 public void setupAudio()
 {
-    audio = new Audio(N_ATOMS * 4, "skr.wav");
-    audio.cue(230);
+    audio = new Audio(B, "lux.wav");
+    audio.cue(190);
     audio.play();
 }
 public void generateAtoms()
@@ -69,7 +70,7 @@ public void generateAtoms()
     atomX = new float[N_ATOMS];
     atomY = new float[N_ATOMS];
     for(int i = 0; i < N_ATOMS; i++)
-        atoms[i] = new Atom(round(random(0, 30)));
+        atoms[i] = new Atom(round(random(50, 80)));
 }
 public void updateAtoms(Audio audio)
 {
@@ -113,7 +114,7 @@ class Atom
         // x = map(random(width), 0, width, 0, 1);
         // y = map(random(height), 0, height, 0, 1);
         // speed = random(10);
-        speed = 0.5f;
+        speed = 0.2f;
         dirX = round(random(-1, 1));
         dirY = round(random(-1, 1));
     }
@@ -137,9 +138,10 @@ class Atom
         //     dir = round(random(-1, 1));
         checkBounds();
         float f = audio.getFrequency(id, 10);
-        float a = audio.getAmplitude(5);
-        x += (f + a) * dirX;
-        y += (f + a) * dirY;
+        float a = audio.getAmplitude(6);
+        a = pow(a, 2);
+        x += (f + a + speed) * dirX;
+        y += (f + a + speed) * dirY;
     }
     public void checkBounds()
     {

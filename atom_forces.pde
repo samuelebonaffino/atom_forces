@@ -14,11 +14,12 @@ PGraphics pg;
 void settings()
 {
     fullScreen(P2D);
-    // size(600, 600, P2D);
+    // size(1920, 1080, P2D);
 }
 
 void setup()
 {
+    frame.setResizable(true);
     pg = createGraphics(width, height, P2D);
     pg.noSmooth();
 
@@ -41,8 +42,8 @@ void draw()
 
 void setupAudio()
 {
-    audio = new Audio(N_ATOMS * 4, "skr.wav");
-    audio.cue(230);
+    audio = new Audio(B, "lux.wav");
+    audio.cue(190);
     audio.play();
 }
 void generateAtoms()
@@ -51,7 +52,7 @@ void generateAtoms()
     atomX = new float[N_ATOMS];
     atomY = new float[N_ATOMS];
     for(int i = 0; i < N_ATOMS; i++)
-        atoms[i] = new Atom(round(random(0, 30)));
+        atoms[i] = new Atom(round(random(50, 80)));
 }
 void updateAtoms(Audio audio)
 {

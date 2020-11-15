@@ -43,7 +43,7 @@ void main()
         f = force(d, f);
     }
 
-    float c = cos(f * 10.0);
+    float c = sin(f * 10.0);
     
     // Colour
     vec3 cl = vec3(1.5-c, f/5.0, f);

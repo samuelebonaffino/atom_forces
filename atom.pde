@@ -15,7 +15,7 @@ class Atom
         // x = map(random(width), 0, width, 0, 1);
         // y = map(random(height), 0, height, 0, 1);
         // speed = random(10);
-        speed = 0.5;
+        speed = 0.2;
         dirX = round(random(-1, 1));
         dirY = round(random(-1, 1));
     }
@@ -39,9 +39,10 @@ class Atom
         //     dir = round(random(-1, 1));
         checkBounds();
         float f = audio.getFrequency(id, 10);
-        float a = audio.getAmplitude(5);
-        x += (f + a) * dirX;
-        y += (f + a) * dirY;
+        float a = audio.getAmplitude(6);
+        a = pow(a, 2);
+        x += (f + a + speed) * dirX;
+        y += (f + a + speed) * dirY;
     }
     void checkBounds()
     {
