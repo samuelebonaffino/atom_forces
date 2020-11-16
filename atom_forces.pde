@@ -2,6 +2,7 @@ final static int N_ATOMS = 16;
 Atom[] atoms;
 float[] atomX;
 float[] atomY;
+float time;
 
 // Audio
 Audio audio;
@@ -19,9 +20,11 @@ void settings()
 
 void setup()
 {
-    frame.setResizable(true);
+    // surface.setResizable(true);
     pg = createGraphics(width, height, P2D);
     pg.noSmooth();
+
+    time = 0;
 
     initShader();
     generateAtoms();
@@ -30,6 +33,7 @@ void setup()
 
 void draw()
 {
+    time += 0.001;
     updateAtoms(audio);
     updateShader();
     pg.beginDraw();
@@ -78,4 +82,5 @@ void updateShader()
 {   
     myShader.set("u_atom_x", atomX);
     myShader.set("u_atom_y", atomY);
+    myShader.set("u_amp", audio.getAmplitude());
 }

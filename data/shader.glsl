@@ -5,6 +5,7 @@ precision mediump float;
 #define PROCESSING_COLOR_SHADER
 
 uniform vec2  u_resolution;
+uniform float u_amp;
 uniform int   u_num_atoms;
 uniform float u_atom_x[16];
 uniform float u_atom_y[16];
@@ -20,6 +21,12 @@ float force(float d, float f)
 {
     f += exp(-pow(d * 8.0, 2.0)) / 1.0;
     return f;
+}
+float thresholdAmplitude(float amplitude, float threshold)
+{
+    if(amplitude < threshold)
+        return 0;
+    return amplitude;
 }
 
 void main()
@@ -43,11 +50,14 @@ void main()
         f = force(d, f);
     }
 
-    float c = sin(f * 10.0);
+    // float c = sin(f * 10.0);
+    float amp = pow(u_amp, 6);
+    float c = sin(f * amp * 50.0);
     
     // Colour
-    vec3 cl = vec3(1.5-c, f/5.0, f);
-    // vec3 cl = vec3(1.5-c, f/5.0, c);
+    // vec3 cl = vec3(1.5-c, f/5.0, f);
+    vec3 cl = vec3(c, c, c);
+    
 
     // for(int i = 0; i < u_num_atoms; i++)
     // {
@@ -56,5 +66,6 @@ void main()
     //         cl = vec3(1.0, 1.0, 0);
     // }
 
-    gl_FragColor = vec4(cl, 1.0);
+    // gl_FragColor = vec4(cl, 1.0);
+    gl_FragColor = vec4(cl, f/5.0);
 }
