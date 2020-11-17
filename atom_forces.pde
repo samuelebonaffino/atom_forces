@@ -46,7 +46,7 @@ void draw()
 
 void setupAudio()
 {
-    audio = new Audio(B, "lux.wav");
+    audio = new Audio(B, "waaatari.wav");
     audio.cue(190);
     audio.play();
 }
@@ -83,4 +83,5 @@ void updateShader()
     myShader.set("u_atom_x", atomX);
     myShader.set("u_atom_y", atomY);
     myShader.set("u_amp", audio.getAmplitude());
+    // myShader.set("u_time", time);
 }
